@@ -93,7 +93,15 @@ InsertBelow
 else
 call .finished
 insertbelow
-endif˛/.NewRecordˇ˛.addtoordernewˇIf Status contains "com"
+endif˛/.NewRecordˇ˛.addtomailinglistˇopenfile "44 mailing list"
+;; first search really thoroughly (by address, by email)
+
+goform "Add Walkin Customer"
+insertrecord
+inqcode=str(yearvalue(today()))[3,4]+"wi"
+S=1
+T=1
+Bf=1˛/.addtomailinglistˇ˛.addtoordernewˇIf Status contains "com"
 stop
 endif
 local qty, newitem
@@ -991,7 +999,8 @@ superobject "ogspopup", "FIllList"
 showpage
 ogsitem=""
 endnoshow˛/.ogsfindˇ˛.openaddressˇsetwindowrectangle rectanglesize(704,1267,347,528),""
-openform "CollectAddress"˛/.openaddressˇ˛.paidcashˇfileglobal tendered, change, addpay, paychoice
+openform "CollectAddress"˛/.openaddressˇ˛.openremindmeˇsetwindowrectangle rectanglesize(504,1067,280,600),""
+openform "Remindme"˛/.openremindmeˇ˛.paidcashˇfileglobal tendered, change, addpay, paychoice
 tendered=0
 addpay=0
 popup "Cash"+¶+"Check"+¶+"Money Order", 150, 500, "Cash", paychoice
@@ -1734,7 +1743,8 @@ if clipboard() contains "yes"
     deleterecord
 else 
     stop
-endif˛/.deleterecordˇ˛SourceGetˇlocal Dictionary, ProcedureList
+endif˛/.deleterecordˇ˛find customers without c#ˇselect «C#» = 0 and Name <> "" and  (Staff = "Y" or Special = "Y" or TaxExempt = "Y" or «%Discount» > 0) and Group notcontains "Arbico"
+˛/find customers without c#ˇ˛SourceGetˇlocal Dictionary, ProcedureList
 //this saves your procedures into a variable
 //step one
 saveallprocedures "", Dictionary
@@ -1748,17 +1758,7 @@ STOP
 //run the procedure one step at a time to load the list on your clipboard back in
 Dictionary=clipboard()
 loadallprocedures Dictionary,ProcedureList
-message ProcedureList //messages which procedures got changed˛/SourceGetˇ˛.addtomailinglistˇopenfile "44 mailing list"
-;; first search really thoroughly (by address, by email)
-
-goform "Add Walkin Customer"
-insertrecord
-inqcode=str(yearvalue(today()))[3,4]+"wi"
-S=1
-T=1
-Bf=1˛/.addtomailinglistˇ˛.openremindmeˇsetwindowrectangle rectanglesize(504,1067,280,600),""
-openform "Remindme"˛/.openremindmeˇ˛find customers without c#ˇselect «C#» = 0 and Name <> "" and  (Staff = "Y" or Special = "Y" or TaxExempt = "Y" or «%Discount» > 0) and Group notcontains "Arbico"
-˛/find customers without c#ˇ˛SourceGetGiveˇlocal Dictionary, ProcedureList
+message ProcedureList //messages which procedures got changed˛/SourceGetˇ˛SourceGetGiveˇlocal Dictionary, ProcedureList
 
 saveallprocedures "", Dictionary
 clipboard()=Dictionary
