@@ -1,3 +1,5 @@
+//this is just a copy of the JPs version that I used for testing
+
 ˛.Initializeˇpermanent lasttime, lasttime2
 global creditex, walkin, names, list,num, mtenter, fbenter, sdsenter,ordered,taxable, 
 price,quant,tot,item,numb,display,mtordered, fbordered, sdsordered, usedisc,
